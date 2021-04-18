@@ -39,10 +39,10 @@ public class Order {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	@JsonIgnoreProperties("orders")
+	@JsonIgnoreProperties(value = "orders", allowSetters = true)
 	private User user;
 	
-	@OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private Set<Orderline> orderlines = new HashSet<>();
 	
 	public void addOrderline(Orderline orderline) {

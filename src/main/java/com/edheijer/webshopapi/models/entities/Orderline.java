@@ -1,5 +1,7 @@
 package com.edheijer.webshopapi.models.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,8 +19,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "orderLines")
-public class Orderline {
+@Table(name = "orderlines")
+public class Orderline implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +33,11 @@ public class Orderline {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "order_id")
-	@JsonIgnoreProperties("orderlines")
+	@JsonIgnoreProperties(value= "orderlines", allowSetters = true)
 	private Order order;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
+	@JsonIgnoreProperties(value = "orderlines", allowSetters = true)
 	@JoinColumn(name = "product_id")
 	private Product product;
 	

@@ -2,6 +2,7 @@ package com.edheijer.webshopapi.models.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 
 import com.edheijer.webshopapi.models.dtos.OrderlineDTO;
 import com.edheijer.webshopapi.models.entities.Orderline;
@@ -11,6 +12,7 @@ public interface OrderlineMapper extends EntityMapper<OrderlineDTO, Orderline> {
 	
 	@Mapping(source = "product.id", target = "productId")
 	@Mapping(source = "order.id", target = "orderId")
+	@Named(value = "useMe")
 	OrderlineDTO toDTO(Orderline orderline);
 	
 	@Mapping(source = "productId", target = "product")
