@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import com.edheijer.webshopapi.services.ProductService;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ProductController {
 
 	@Autowired
@@ -24,7 +26,9 @@ public class ProductController {
 	
 	@GetMapping("/products")
 	public ResponseEntity<List<ProductDTO>> getAllProducts(Pageable pageable) {
+		
 		Page<ProductDTO> page = productService.findAll(pageable);
+		System.out.println(page.getContent());
 		return ResponseEntity.ok().headers(new HttpHeaders()).body(page.getContent());
 	}
 	
