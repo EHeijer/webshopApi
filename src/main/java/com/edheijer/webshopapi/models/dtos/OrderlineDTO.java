@@ -9,6 +9,6 @@ public class OrderlineDTO implements Serializable{
 	private Long id;
 	private int quantity;
 	private Double sumOfOrderline;
-	private Long productId;
+	private ProductDTO product;
 	private Long orderId;
 }

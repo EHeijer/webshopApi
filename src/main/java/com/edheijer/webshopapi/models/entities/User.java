@@ -46,8 +46,14 @@ public class User {
 			inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private Set<Order> orders = new HashSet<>();
+	
+	public User(String username, String email, String password) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
 	
 	public void addOrder(Order order) {
 		this.orders.add(order);
@@ -58,4 +64,5 @@ public class User {
 		this.orders.remove(order);
 		order.setUser(null);
 	}
+	
 }

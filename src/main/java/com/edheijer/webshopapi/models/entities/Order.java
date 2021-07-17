@@ -19,12 +19,14 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
 @Data
 @Table(name = "orders")
+@EqualsAndHashCode(exclude="user")
 public class Order {
 	
 	@Id
@@ -42,7 +44,7 @@ public class Order {
 	@JsonIgnoreProperties(value = "orders", allowSetters = true)
 	private User user;
 	
-	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Orderline> orderlines = new HashSet<>();
 	
 	public void addOrderline(Orderline orderline) {

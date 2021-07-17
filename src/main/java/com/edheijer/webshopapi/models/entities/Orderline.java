@@ -14,12 +14,14 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @Entity
 @Table(name = "orderlines")
+@EqualsAndHashCode(exclude="order")
 public class Orderline implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -36,8 +38,7 @@ public class Orderline implements Serializable{
 	@JsonIgnoreProperties(value= "orderlines", allowSetters = true)
 	private Order order;
 	
-	@ManyToOne
-	@JsonIgnoreProperties(value = "orderlines", allowSetters = true)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_id")
 	private Product product;
 	

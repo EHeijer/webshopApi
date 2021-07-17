@@ -10,12 +10,12 @@ import com.edheijer.webshopapi.models.entities.Orderline;
 @Mapper(componentModel = "spring", uses = {ProductMapper.class, OrderMapper.class})
 public interface OrderlineMapper extends EntityMapper<OrderlineDTO, Orderline> {
 	
-	@Mapping(source = "product.id", target = "productId")
+//	@Mapping(source = "product.id", target = "productId")
 	@Mapping(source = "order.id", target = "orderId")
 	@Named(value = "useMe")
 	OrderlineDTO toDTO(Orderline orderline);
 	
-	@Mapping(source = "productId", target = "product")
+//	@Mapping(source = "productId", target = "product")
 	@Mapping(source = "orderId", target = "order")
 	Orderline toEntity(OrderlineDTO orderlineDTO);
 	
